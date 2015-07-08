@@ -11,7 +11,7 @@ VENV_RUNNING_=`env | grep VIRTUAL_ENV | wc -l | tr -d [[:space:]]`
 if [ 0 == ${VENV_RUNNING_} ]; then
   echo "ERROR: Python virtual environment not running"
   echo
-  echo "Try '. venv33/bin/activate' to start the virtual environment, and"
+  echo "Try '. venv34/bin/activate' to start the virtual environment, and"
   echo "then try '${SCRIPTNAME_}' again."
   echo
   exit 1

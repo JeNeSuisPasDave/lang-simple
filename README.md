@@ -12,23 +12,45 @@ lang-simple is written in Python, targeting Python 3.4 or later. The primary sou
 
 There is a lint script, `lint.sh`, that is used to ensure the Python code follow PEP guidelines for style and usage. The lint output is reported in `src\fixme.lint.txt` and `tests\fixme.lint.txt`. If these files are empty after running the script, then no issues were detected.
 
+### OS X
+
 To run the linter:
 
 ~~~bash
 $ ./lint.sh
 ~~~
 
+### Windows 8.1
+
+To run the linter:
+
+~~~powershell
+> .\lint.ps1
+~~~
+
 ## Testing
 
 To run the tests:
 
+### OS X
+
 ~~~bash
-$ ./tests.sh
+$ ./test.sh
+~~~
+
+### Windows 8.1
+
+To run the linter:
+
+~~~powershell
+> .\test.ps1
 ~~~
 
 ## Virtual Environment
 
 Both the linter and test scripts check that a Python virtual environment is in place.
+
+### OS X
 
 On my OS X machine I setup the virtual environment as follows, starting from a Terminal window in the root of the project directory tree:
 
@@ -45,6 +67,24 @@ To leave the virtual environment, I do this:
 ~~~bash
 (venv34)$ deactivate
 $
+~~~
+
+### Windows 8.1
+
+On my Windows 8.1 machine I have ActiveState Python installed. I set up the viritual environment as follows, starting from a Powershell prompt in the root of the project directory tree:
+
+~~~powershell
+> c:\Python34\python -m venv venv34
+> .\venv34\Scripts\Activate.ps1
+(venv34)> pip install -U setuptools
+(venv34)> pip install pyPEG2
+~~~
+
+To leave the virtual environment, I do this:
+
+~~~powershell
+(venv34)> deactivate
+>
 ~~~
 
 ## Contributing
