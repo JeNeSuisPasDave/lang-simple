@@ -110,3 +110,57 @@ class ParsingSimpleTests(unittest.TestCase):
 
         self.assertEqual("x = 1 + 2", c)
         self.assertEqual(Assign('x', Add(Number(1), Number(2))), a)
+
+    def test_program(self):
+        """Test simple 3 line program."""
+        simple_lines = \
+            """
+            x = 1 + 1
+            y = x + 3
+            z = y + 5
+            """
+        f = parse(simple_lines, p.Program)
+        c = compose(f)
+        prog = f.to_simple()
+
+        env_expected = dict(x=Number(2), y=Number(5), z=Number(10))
+        env = {}
+        env2 = prog.evaluate(env)
+        self.assertEqual(len(env_expected), len(env2))
+        for x in env_expected.keys():
+            self.assertEqual(env_expected[x], env2[x])
+
+        # show that we can reuse the program
+
+        env3 = prog.evaluate(env2)
+        self.assertEqual(len(env_expected), len(env3))
+        for x in env_expected.keys():
+            self.assertEqual(env_expected[x], env3[x])
+
+
+    def test_program_diff_env(self):
+        """Test simple 2 line program with different initial conditions."""
+        simple_lines = \
+            """
+            y = x + 3
+            z = y + 5
+            """
+        f = parse(simple_lines, p.Program)
+        c = compose(f)
+        prog = f.to_simple()
+
+        env_expected = dict(x=Number(2), y=Number(5), z=Number(10))
+        env = dict(x=Number(2))
+        env2 = prog.evaluate(env)
+        self.assertEqual(len(env_expected), len(env2))
+        for x in env_expected.keys():
+            self.assertEqual(env_expected[x], env2[x])
+
+        # show that we can reuse the program
+
+        env_expected = dict(x=Number(9), y=Number(12), z=Number(17))
+        env2['x'] = Number(9)
+        env3 = prog.evaluate(env2)
+        self.assertEqual(len(env_expected), len(env3))
+        for x in env_expected.keys():
+            self.assertEqual(env_expected[x], env3[x])

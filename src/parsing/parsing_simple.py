@@ -183,7 +183,7 @@ class Block(List):
         if 2 < len(remaining):
             return s_s.Sequence(
                 remaining[0].to_simple(),
-                self.to_simple_subblock(remaining[1:]))
+                self._to_simple_subblock(remaining[1:]))
         else:
             return s_s.Sequence(
                 remaining[0].to_simple(),
@@ -206,7 +206,7 @@ class Block(List):
         if 1 == len(self):
             return s_s.Sequence(s_s.DoNothing(), self[0].to_simple())
         else:
-            return self.to_simple_subblock(self[:])
+            return self._to_simple_subblock(self[:])
 
 
 class Program(List):
