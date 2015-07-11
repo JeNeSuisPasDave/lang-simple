@@ -120,7 +120,6 @@ class ParsingSimpleTests(unittest.TestCase):
             z = y + 5
             """
         f = parse(simple_lines, p.Program)
-        c = compose(f)
         prog = f.to_simple()
 
         env_expected = dict(x=Number(2), y=Number(5), z=Number(10))
@@ -137,7 +136,6 @@ class ParsingSimpleTests(unittest.TestCase):
         for x in env_expected.keys():
             self.assertEqual(env_expected[x], env3[x])
 
-
     def test_program_diff_env(self):
         """Test simple 2 line program with different initial conditions."""
         simple_lines = \
@@ -146,7 +144,6 @@ class ParsingSimpleTests(unittest.TestCase):
             z = y + 5
             """
         f = parse(simple_lines, p.Program)
-        c = compose(f)
         prog = f.to_simple()
 
         env_expected = dict(x=Number(2), y=Number(5), z=Number(10))

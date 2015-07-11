@@ -84,9 +84,24 @@ export PYTHONPATH=`pwd`/src
 cd src
 flake8 --max-complexity=10 . > fixme.lint.txt 2>&1
 pep257 --match='(?!ez_setup).*\.py' . >> fixme.lint.txt 2>&1
+ERROR_COUNT_=`wc -l fixme.lint.txt | sed -E 's/[^0-9]*([0-9]+).*/\1/'`
+if (( 0 == ERROR_COUNT_ )); then
+  echo "$(tput setaf 10)./src is OK.$(tput sgr0)"
+else
+  echo "$(tput setaf 9)./src has $ERROR_COUNT_ issues.$(tput sgr0)"
+fi
 cd ..
+
+# lint the tests
+#
 cd tests
 flake8 --max-complexity=10 . > fixme.lint.txt 2>&1
 pep257 --match='.*\.py' . >> fixme.lint.txt 2>&1
+ERROR_COUNT_=`wc -l fixme.lint.txt | sed -E 's/[^0-9]*([0-9]+).*/\1/'`
+if (( 0 == ERROR_COUNT_ )); then
+  echo "$(tput setaf 10)./tests is OK.$(tput sgr0)"
+else
+  echo "$(tput setaf 9)./tests has $ERROR_COUNT_ issues.$(tput sgr0)"
+fi
 cd ..
 
