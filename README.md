@@ -1,6 +1,12 @@
+Title: wat
+
 # lang-simple
 
 This is experimental code for investigating [PEG parsing](https://en.wikipedia.org/wiki/Parsing_expression_grammar) and operational semantics. The *simple* language that is used as the target for the experiments is inspired by the SIMPLE language introduced in the second chapter of [Tom Stuart's book *Understanding Computation*](http://shop.oreilly.com/product/0636920025481.do).
+
+For more about the language and some example code, see the [wiki][wiki].
+
+[wiki]: https://github.com/JeNeSuisPasDave/lang-simple/wiki
 
 ## Dependencies
 
@@ -8,7 +14,7 @@ The primary code depends on the standard Python 3.4 library and upon [pyPEG2](ht
 
 ## Development
 
-lang-simple is written in Python, targeting Python 3.4 or later. The primary source code is in the `src/` folder and there are unit tests in the `tests/` folder.
+lang-simple is written in Python, targeting Python 3.4 or later. The primary source code is in the `src/` folder and there are unit tests in the `tests/` folder. Tests are executed with the `test.sh` script.
 
 There is a lint script, `lint.sh`, that is used to ensure the Python code follow PEP guidelines for style and usage. The lint output is reported in `src\fixme.lint.txt` and `tests\fixme.lint.txt`. If these files are empty after running the script, then no issues were detected.
 

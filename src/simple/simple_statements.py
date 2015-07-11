@@ -61,7 +61,7 @@ class Assign:
 
     def __str__(self):
         """A string representation of the statement."""
-        return "{0} = {1}".format(self.name, self.expression)
+        return "{0} = {1};".format(self.name, self.expression)
 
     def evaluate(self, environment):
         """Execute the expression in the context of the environment.
@@ -253,7 +253,7 @@ class If:
             statement.
 
         """
-        return "{0}if {1}:\n{2}\nelse:\n{3}".format(
+        return "{0}if {1}:\n{2}\n{0}else:\n{3}".format(
             "    " * indentation,
             self.condition.to_python(indentation),
             self.consequence.to_python(indentation + 1),
@@ -286,7 +286,7 @@ class Sequence:
             same first and second statements as this object.
 
         """
-        if not isinstance(other_statement, Assign):
+        if not isinstance(other_statement, Sequence):
             return False
         if self.first != other_statement.first:
             return False
@@ -312,7 +312,7 @@ class Sequence:
 
     def __str__(self):
         """A string representation of the statement."""
-        return "{0}; {1}".format(self.first, self.second)
+        return "{0} {1}".format(self.first, self.second)
 
     def evaluate(self, environment):
         """Execute the expression in the context of the environment.
@@ -373,7 +373,7 @@ class While:
             same condition and body as this object.
 
         """
-        if not isinstance(other_statement, Assign):
+        if not isinstance(other_statement, While):
             return False
         if self.condition != other_statement.condition:
             return False

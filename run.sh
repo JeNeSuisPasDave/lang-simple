@@ -42,5 +42,6 @@ fi
 # Run the test
 #
 export PYTHONPATH=`pwd`/src
-python -m unittest discover -s ./tests/simple
-python -m unittest discover -s ./tests/parsing
+# python -i -m pdb ./src/parsing/parsing_simple.py
+# python -i -m parsing.parsing_simple
+python  -i

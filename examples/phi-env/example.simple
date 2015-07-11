@@ -1,0 +1,8 @@
+while (i < limit)
+{
+  i = i + 1;
+  x0 = x1;
+  x1 = x2;
+  x2 = x1 + x0;
+  phi = x2 / x1;
+}

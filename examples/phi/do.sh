@@ -39,8 +39,7 @@ if [ 0 == ${PYPEG2_INSTALLED_} ]; then
   exit 1
 fi
 
-# Run the test
+# Run the example
 #
-export PYTHONPATH=`pwd`/src
-python -m unittest discover -s ./tests/simple
-python -m unittest discover -s ./tests/parsing
+export PYTHONPATH=`pwd`/../../src
+python do.py example.simple

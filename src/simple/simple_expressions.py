@@ -229,7 +229,7 @@ class Boolean:
 
     def __str__(self):
         """A string representation of the expression."""
-        return "{0}".format(bool(self.value))
+        return "{0}".format("true" if self.value else "false")
 
     def evaluate(self, environment):
         """Return itself.
@@ -629,7 +629,7 @@ class Not:
         """
         if not isinstance(other_expression, Not):
             return False
-        if self.left != other_expression.value:
+        if self.value != other_expression.value:
             return False
         return True
 
@@ -679,7 +679,7 @@ class Not:
             expression.
 
         """
-        return "!({0})".format(
+        return "not ({0})".format(
             self.value.to_python(indentation))
 
 
