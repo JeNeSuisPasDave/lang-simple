@@ -78,13 +78,18 @@ if [ 0 == ${PYPEG2_INSTALLED_} ]; then
   exit 1
 fi
 
+count_errors() {
+  egrep -e "\.py\:[0-9]+\s" fixme.lint.txt \
+    | wc -l | sed -E 's/[^0-9]*([0-9]+).*/\1/'
+}
+
 # lint the source
 #
 export PYTHONPATH=`pwd`/src
 cd src
 flake8 --max-complexity=10 . > fixme.lint.txt 2>&1
 pep257 --match='(?!ez_setup).*\.py' . >> fixme.lint.txt 2>&1
-ERROR_COUNT_=`wc -l fixme.lint.txt | sed -E 's/[^0-9]*([0-9]+).*/\1/'`
+ERROR_COUNT_=`count_errors`
 if (( 0 == ERROR_COUNT_ )); then
   echo "$(tput setaf 10)./src is OK.$(tput sgr0)"
 else
@@ -97,7 +102,7 @@ cd ..
 cd tests
 flake8 --max-complexity=10 . > fixme.lint.txt 2>&1
 pep257 --match='.*\.py' . >> fixme.lint.txt 2>&1
-ERROR_COUNT_=`wc -l fixme.lint.txt | sed -E 's/[^0-9]*([0-9]+).*/\1/'`
+ERROR_COUNT_=`count_errors`
 if (( 0 == ERROR_COUNT_ )); then
   echo "$(tput setaf 10)./tests is OK.$(tput sgr0)"
 else
